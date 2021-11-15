@@ -1,13 +1,13 @@
-Welcome to your new dbt project!
+### Преобразование данных
 
-### Using the starter project
-
-Try running the following commands:
+Запуск трансформаций:
 - dbt run
+
+Тестирование данных:
 - dbt test
 
 
-### Resources:
+### Источники:
 - Learn more about dbt [in the docs](https://docs.getdbt.com/docs/introduction)
 - Check out [Discourse](https://discourse.getdbt.com/) for commonly asked questions and answers
 - Join the [chat](http://slack.getdbt.com/) on Slack for live discussions and support
