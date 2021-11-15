@@ -5,7 +5,7 @@ import orm
 
 
 ITEMS_PER_PAGE = 5
-from telegram import ReplyKeyboardMarkup, Update, InlineKeyboardMarkup,InlineKeyboardButton
+from telegram import ReplyKeyboardMarkup, Update, InlineKeyboardMarkup,InlineKeyboardButton,ReplyKeyboardRemove
 from telegram.ext import (
     Updater,
     CommandHandler,
@@ -42,8 +42,10 @@ POPULAR_LAWS = {
     'Поправки в Конституцию-2020':'31837',
     'Повышение пенсионного возраста':'30043',
     'Закон Димы Яковлева':'19260',
-    'Закон о декриминализации домашнего насилия':'27757'
+    'Декриминализации домашнего насилия':'27757'
 }
+#POPULAR_LAWS_LAYOUT = [[key for key in list(POPULAR_LAWS.keys())[i:i+2]] for i in range(0,3,2)]
+POPULAR_LAWS_LAYOUT = [[key for key in POPULAR_LAWS.keys()]]
 
 def create_law_answer_for_deputy(law,vote_id):
     if law[7] == 'for':
@@ -159,7 +161,7 @@ def type_law(update: Update, context: CallbackContext) -> int:
         user_data['fac_name'] = text
         user_data['fac_id'] = fac_id
 
-    fkeyboard = [[name] for name in POPULAR_LAWS.keys()]
+    fkeyboard = POPULAR_LAWS_LAYOUT[:]
     fkeyboard.append(DONE_BTN)
     fmarkup = ReplyKeyboardMarkup(fkeyboard, resize_keyboard=True, one_time_keyboard=True)
 
@@ -171,10 +173,11 @@ def choice_law(update: Update, context: CallbackContext) -> int:
     user_data = context.user_data
     answer = ''
     route = user_data['route']
+    first_request = False
 
 
     if 'laws' not in user_data:
-
+        first_request = True
         text = update.message.text
         user_data['page']=0
 
@@ -196,6 +199,9 @@ def choice_law(update: Update, context: CallbackContext) -> int:
 
         user_data['laws'] = laws
         user_data['num_pages'] = len(laws) // ITEMS_PER_PAGE
+        if len(laws) % ITEMS_PER_PAGE:
+            user_data['num_pages'] += 1
+
 
 
     else:
@@ -225,22 +231,30 @@ def choice_law(update: Update, context: CallbackContext) -> int:
 
 
     footer = []
+    start = user_data['page']*ITEMS_PER_PAGE
     fkeyboard = [[InlineKeyboardButton(value[0] + '\n' + value[1], callback_data=key)]
                  for key, value in
-                 list(user_data['laws'].items())[user_data['page']:user_data['page'] + ITEMS_PER_PAGE]]
+                 list(user_data['laws'].items())[start:start + ITEMS_PER_PAGE]]
     if user_data['page'] > 0:
         footer.append(InlineKeyboardButton('Пред.',callback_data='prev'))
     if user_data['page'] < user_data['num_pages'] - 1:
-            footer.append(InlineKeyboardButton('След.', callback_data='next'))
+        footer.append(InlineKeyboardButton('След.', callback_data='next'))
 
     fkeyboard.append(footer)
     fkeyboard.append([InlineKeyboardButton('Завершить',callback_data='done')])
 
     fmarkup = InlineKeyboardMarkup(fkeyboard)
-    answer += f"\nГолосования {user_data['page']*ITEMS_PER_PAGE+1}-{(user_data['page']+1)*ITEMS_PER_PAGE} из {len(user_data['laws'])}:"
+    if user_data['page']==user_data['num_pages']-1:
+        # Last page
+        to = len(user_data['laws'])
+    else:
+        to = (user_data['page'] + 1) * ITEMS_PER_PAGE
+    answer += f"\nГолосования {user_data['page']*ITEMS_PER_PAGE+1}-{to} из {len(user_data['laws'])}:"
 
     if update.callback_query:
-            update.callback_query.edit_message_text(answer, reply_markup=fmarkup,parse_mode='html')
+        #if first_request:
+        #    update.callback_query.edit_message_text(' ', reply_markup=ReplyKeyboardRemove())
+        update.callback_query.edit_message_text(answer, reply_markup=fmarkup,parse_mode='html')
     else:
         update.message.reply_text(answer, reply_markup=fmarkup,parse_mode='html')
     return CHOOSING_LAW
