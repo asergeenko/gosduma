@@ -1,0 +1,1 @@
+select id as law_id,{{ref('committees')}}.id as committee_id from gosduma.laws_json inner join {{ref('committees')}} on {{ref('committees')}}.id=committees_responsible_id

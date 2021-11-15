@@ -1,0 +1,19 @@
+
+version: 2
+
+models:
+    - name: laws_departments
+      description: "Law departments / Список федеральных или региональных органов власти — субъектов законодательной инициативы"
+      columns:
+          - name: law_id
+            tests:
+              - relationships:
+                  to: ref('laws')
+                  field: id
+          - name: department_id
+            tests:
+              - relationships:
+                  to: ref('departments')
+                  field: id
+
+      order_by: (law_id,department_id)

@@ -1,0 +1,19 @@
+
+version: 2
+
+models:
+    - name: laws_soexecutor
+      description: "Soexecutor committees / Список комитетов-соисполнителей"
+      columns:
+          - name: law_id
+            tests:
+              - relationships:
+                  to: ref('laws')
+                  field: id
+          - name: committee_id
+            tests:
+              - relationships:
+                  to: ref('committees')
+                  field: id
+
+      order_by: (law_id,committee_id)

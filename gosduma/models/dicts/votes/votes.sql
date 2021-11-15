@@ -1,0 +1,2 @@
+select distinct gosduma.votes_json.id as id, {{ref('laws')}}.id as law_id, date, subject, transcriptLink as transcript_link, resolution, for, against, abstain, absent
+from gosduma.votes_json inner join {{ref('laws')}} on gosduma.votes_json.lawNumber={{ref('laws')}}.number 

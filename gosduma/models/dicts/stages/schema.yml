@@ -1,0 +1,16 @@
+
+version: 2
+
+models:
+    - name: stages
+      description: "Law stages / Список стадий рассмотрения"
+      columns:
+          - name: id
+            description: "The primary key for this table"
+            tests:
+                - unique
+                - not_null
+          - name: name
+            description: "Stage name / Стадия рассмотрения"
+
+      order_by: (id)

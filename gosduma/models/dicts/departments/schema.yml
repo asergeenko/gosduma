@@ -1,0 +1,22 @@
+
+version: 2
+
+models:
+    - name: departments
+      description: "Departments / Список органов власти"
+      columns:
+          - name: id
+            description: "The primary key for this table"
+            tests:
+                - unique
+                - not_null
+          - name: name
+            description: "Department name / Орган власти"
+          - name: is_current
+            description: "Орган власти действует в настоящее время"
+          - name: start_date
+            description: "Дата начала полномочий органа власти"
+          - name: stop_date
+            description: "Дата конца полномочий органа власти"
+      order_by: (id)
+

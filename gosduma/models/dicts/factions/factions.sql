@@ -1,0 +1,1 @@
+select distinct fac_id as id,fac_name as name from gosduma.deputies_json array join fac_id,fac_name

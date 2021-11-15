@@ -1,0 +1,27 @@
+
+version: 2
+
+models:
+    - name: votes_factions
+      description: "Votes factions / Связка фракций и голосований"
+      columns:
+          - name: vote_id
+            tests:
+              - relationships:
+                  to: ref('votes')
+                  field: id
+          - name: faction_id
+            tests:
+              - relationships:
+                  to: ref('factions')
+                  field: id
+          - name: for
+            description: "Число депутатов, проголосовавших <за>"
+          - name: against
+            description: "Число депутатов, проголосовавших <против>"
+          - name: abstain
+            description: "Число депутатов, проголосовавших <воздержался>"
+          - name: absent
+            description: "Число непроголосовавших депутатов"
+
+      order_by: (vote_id,faction_id)

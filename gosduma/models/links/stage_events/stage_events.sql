@@ -1,0 +1,1 @@
+select id as stage_id,phase_id as event_id,phase_name as name,instance_id from gosduma.stages_json array join phase_id,phase_name,instance_id

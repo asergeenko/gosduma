@@ -1,0 +1,1 @@
+select id, name from gosduma.stages_json

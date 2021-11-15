@@ -1,0 +1,15 @@
+
+version: 2
+
+models:
+    - name: doctypes
+      description: "Document types / Типы документов, связанный с событием рассмотрения законопроекта"
+      columns:
+          - name: id
+            description: "The primary key for this table"
+            tests:
+                - unique
+                - not_null
+          - name: name
+            description: "Doc type name / Наименование типа документа"
+      order_by: (id)

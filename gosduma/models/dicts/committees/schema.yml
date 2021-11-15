@@ -1,0 +1,18 @@
+
+version: 2
+
+models:
+    - name: committees
+      description: "Committees / Комитеты"
+      columns:
+          - name: id
+            description: "The primary key for this table"
+            tests:
+                - unique
+                - not_null
+          - name: name
+            description: "Committee name / Наименование комитета"
+          - name: is_current
+          - name: start_date
+          - name: stop_date
+      order_by: (id)

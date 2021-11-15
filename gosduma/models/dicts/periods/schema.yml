@@ -1,0 +1,21 @@
+
+version: 2
+
+models:
+    - name: periods
+      description: "Periods / Список созывов"
+      columns:
+          - name: id
+            description: "The primary key for this table"
+            tests:
+                - unique
+                - not_null
+          - name: name
+            description: "Period name / Наименование созыва"
+          - name: start_date
+            description: "Дата начала созыва"
+          - name: end_date
+            description: "Дата завершения созыва"
+
+
+      order_by: (id)

@@ -1,0 +1,19 @@
+
+version: 2
+
+models:
+    - name: laws_responsible
+      description: "Responsibe committees / Список ответственных за законопроект комитетов"
+      columns:
+          - name: law_id
+            tests:
+              - relationships:
+                  to: ref('laws')
+                  field: id
+          - name: committee_id
+            tests:
+              - relationships:
+                  to: ref('committees')
+                  field: id
+
+      order_by: (law_id,committee_id)

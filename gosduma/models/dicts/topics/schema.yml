@@ -1,0 +1,15 @@
+
+version: 2
+
+models:
+    - name: topics
+      description: "Law topics / Список тематических блоков"
+      columns:
+          - name: id
+            description: "The primary key for this table"
+            tests:
+                - unique
+                - not_null
+          - name: name
+            description: "Topic name / Наименование тематического блока"
+      order_by: (id)

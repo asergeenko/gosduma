@@ -1,0 +1,1 @@
+select id, name,start_date,end_date from gosduma.periods_json

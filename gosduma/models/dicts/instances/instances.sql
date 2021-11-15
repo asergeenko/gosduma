@@ -1,0 +1,1 @@
+select id, name,isCurrent as is_current  from gosduma.instances_json

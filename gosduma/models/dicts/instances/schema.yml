@@ -1,0 +1,17 @@
+
+version: 2
+
+models:
+    - name: instances
+      description: "Instances / Список инстанций рассмотрения"
+      columns:
+          - name: id
+            description: "The primary key for this table"
+            tests:
+                - unique
+                - not_null
+          - name: name
+            description: "Instance name / Инстанция рассмотрения"
+          - name: is_current
+            description: "Инстанция рассмотрения действует в настоящее время"
+      order_by: (id)

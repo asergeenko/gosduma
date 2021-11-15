@@ -1,0 +1,24 @@
+
+version: 2
+
+models:
+    - name: votes_deputies
+      description: "Votes deputies / Связка депутатов и голосований"
+      columns:
+          - name: vote_id
+            tests:
+              - relationships:
+                  to: ref('votes')
+                  field: id
+          - name: deputy_id
+            tests:
+              - relationships:
+                  to: ref('deputies')
+                  field: id
+          - name: result_id
+            tests:
+              - relationships:
+                  to: ref('vote_results')
+                  field: id
+
+      order_by: (vote_id,deputy_id,result_id)

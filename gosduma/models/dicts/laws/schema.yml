@@ -1,0 +1,49 @@
+
+version: 2
+
+models:
+    - name: laws
+      description: "Laws / Список законопроектов"
+      columns:
+          - name: id
+            tests:
+                - unique
+                - not_null
+          - name: name
+            description: "Law name / Название законопроекта"
+          - name: number
+            description: "Номер законопроекта"
+          - name: comments
+            description: "Комментарий к законопроекту"
+          - name: introduction_date
+            description: "Дата внесения законопроекта в ГД"
+          - name: url
+            description: "Адрес страницы законопроекта в АСОЗД"
+          - name: transcript_url
+            description: "Ссылка на стенограммы по законопроекту"
+          - name: stage_id
+            description: "Идентификатор стадии рассмотрения законопроекта"
+            tests:
+              - relationships:
+                  to: ref('stages')
+                  field: id
+          - name: solution
+            description: "Принятое решение (формулировка)"
+          - name: last_event_date
+            description: "Дата последнего события" 
+          - name: docname
+            description: "Название документа, связанного с событием рассмотрения законопроекта" 
+          - name: doctype_id
+            description: "Тип документа, связанного с событием рассмотрения законопроекта" 
+            tests:
+              - relationships:
+                  to: ref('doctypes')
+                  field: id
+          - name: lawtype_id
+            description: "Индентификатор типа законопроекта"
+            tests:
+              - relationships:
+                  to: ref('law_types')
+                  field: id
+
+      order_by: (id)

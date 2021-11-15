@@ -1,0 +1,26 @@
+
+version: 2
+
+models:
+    - name: stage_events
+      description: "Stage events / Список событий для стадий рассмотрения"
+      columns:
+          - name: stage_id
+            tests:
+              - relationships:
+                  to: ref('stages')
+                  field: id
+          - name: event_id
+            tests:
+                - unique
+                - not_null
+          - name: name
+            description: "Stage event name / Событие стадии рассмотрения"
+          - name: instance_id
+            tests:
+              - relationships:
+                  to: ref('instances')
+                  field: id
+
+      order_by: (stage_id,event_id)
+      #+post-hook: "PRIMARY KEY(id)"

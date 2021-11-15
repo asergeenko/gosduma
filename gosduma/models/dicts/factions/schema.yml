@@ -1,0 +1,15 @@
+
+version: 2
+
+models:
+    - name: factions
+      description: "Gosduma factions / Фракции ГД"
+      columns:
+          - name: id
+            description: "The primary key for this table"
+            tests:
+                - unique
+                - not_null
+          - name: name
+            description: "Faction name / Название фракции"
+      order_by: (id)

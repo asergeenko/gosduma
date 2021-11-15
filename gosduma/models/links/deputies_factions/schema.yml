@@ -1,0 +1,22 @@
+
+version: 2
+
+models:
+    - name: deputies_factions
+      description: "Deputies-Factions Link"
+      columns:
+          - name: deputy_id
+            tests:
+              - relationships:
+                  to: ref('deputies')
+                  field: id
+          - name: faction_id
+            tests:
+              - relationships:
+                  to: ref('factions')
+                  field: id  
+          - name: start_date
+            description: "Start working in faction / Начало работы депутата во фракции"
+          - name: end_date
+            description: "End working in faction / Конец работы депутата во фракции"
+

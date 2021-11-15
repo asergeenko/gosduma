@@ -1,0 +1,15 @@
+
+version: 2
+
+models:
+    - name: classes
+      description: "Law classes / Список отраслей законодательства"
+      columns:
+          - name: id
+            description: "The primary key for this table"
+            tests:
+                - unique
+                - not_null
+          - name: name
+            description: "Class name / Отрасль законодательства"
+      order_by: (id)

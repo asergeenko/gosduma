@@ -1,0 +1,19 @@
+
+version: 2
+
+models:
+    - name: laws_deputies
+      description: "Law deputies / Депутаты ГД или члены СФ — субъекты законодательной инициативы"
+      columns:
+          - name: law_id
+            tests:
+              - relationships:
+                  to: ref('laws')
+                  field: id
+          - name: deputy_id
+            tests:
+              - relationships:
+                  to: ref('deputies')
+                  field: id
+
+      order_by: (law_id,deputy_id)
