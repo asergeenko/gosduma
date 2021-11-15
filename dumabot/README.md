@@ -1,0 +1,2 @@
+### Запуск
+python dumabot.py
